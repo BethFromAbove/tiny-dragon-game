@@ -41,7 +41,7 @@ export default class TitleScene extends Phaser.Scene {
         };
 
         // Game - Head to Rocket Select page
-        this.gameButton = new Button(this, config.width*0.75, config.height/2 - 110, 'Button', 'ButtonPressed', 'Play', 'Intro');
+        this.gameButton = new Button(this, config.width*0.75, config.height/2 - 110, 'Button', 'ButtonPressed', 'Play', 'Game');
 
         // Options
         this.optionsButton = new Button(this, config.width*0.75, config.height/2 - 10, 'Button', 'ButtonPressed', 'Options', 'Options');

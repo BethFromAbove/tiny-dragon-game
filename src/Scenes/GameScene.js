@@ -26,11 +26,12 @@ export default class GameScene extends Phaser.Scene {
         var worldScaleFactor = 2;
         var gameWorld = this.physics.world;
         gameWorld.setBounds(0, 0, gameWidth * worldScaleFactor, gameHeight * worldScaleFactor);
+        this.cameras.main.setBounds(0, 0, 1600, 1200);
 
-        var background = this.add.image(0, 0, 'carPark');
+        var background = this.add.image(0, 0, 'livingRoom');
         background.setOrigin(0, 0);
 
-        player = this.physics.add.sprite(0, 0, 'player');
+        player = this.physics.add.sprite(0, 0, 'standing');
         player.setCollideWorldBounds(true);
 
         // Input Events
@@ -42,6 +43,7 @@ export default class GameScene extends Phaser.Scene {
         platforms.create(600, 400, 'Button');
         platforms.create(50, 250, 'Button');
         platforms.create(750, 220, 'Button');
+        platforms.create(800, 1100,'floorplatform');
 
         // Treasures to collect
         var redCar = this.physics.add.sprite(600, 300, 'redCar');
@@ -62,9 +64,15 @@ export default class GameScene extends Phaser.Scene {
 
         // Animations
         this.anims.create({
-            key: 'walk',
-            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 1 }),
-            frameRate: 4,
+            key: 'flyR',
+            frames: this.anims.generateFrameNumbers('flyingR', { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'flyL',
+            frames: this.anims.generateFrameNumbers('flyingL', { start: 0, end: 2 }),
+            frameRate: 5,
             repeat: -1
         });
         this.anims.create({
@@ -111,27 +119,32 @@ export default class GameScene extends Phaser.Scene {
         if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
-            player.anims.play('walk', true);
+            player.anims.play('flyL', true);
 
             //player.anims.play('left', true);
         }
         else if (cursors.right.isDown)
         {
             player.setVelocityX(160);
-            player.anims.play('walk', true);
+            player.anims.play('flyR', true);
 
             //player.anims.play('right', true);
         }
         else
         {
             player.setVelocityX(0);
-            player.anims.play('walk', false);
+            //player.anims.play('flyR', false);
             //player.anims.play('turn');
+            player.setTexture('standing');
         }
 
         if (cursors.up.isDown && player.body.touching.down)
         {
             player.setVelocityY(-330);
+        }
+        else if (cursors.up.isDown && !player.body.touching.down)
+        {
+            player.setVelocityY(-150);
         }
 
         this.cameras.main.centerOn(player.x, player.y);

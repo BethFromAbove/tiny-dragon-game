@@ -103,7 +103,13 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('aboutBG', 'assets/img/aboutBackground.png');
         this.load.image('introBG', 'assets/img/introBackground.png');
 
-        // TEMP assets
+        this.load.image('livingRoom', 'assets/img/livingroom.png');
+        this.load.image('floorplatform', 'assets/img/floorPlatform.png');
+
+        this.load.spritesheet('flyingL', 'assets/img/flying.png', { frameWidth: 250, frameHeight: 200 });
+        this.load.spritesheet('flyingR', 'assets/img/flyingRight.png', { frameWidth: 250, frameHeight: 200 });
+        this.load.image('standing', 'assets/img/standing.png');
+
         this.load.image('sky', 'assets/img/sky.png');
         this.load.image('deathScene', 'assets/img/deathScene.png');
 
