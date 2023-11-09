@@ -46,16 +46,16 @@ export default class GameScene extends Phaser.Scene {
         platforms.create(800, 1100,'floorplatform');
 
         // Treasures to collect
-        var redCar = this.physics.add.sprite(600, 300, 'redCar');
-        var orangeCar = this.physics.add.sprite(470, 205, 'orangeCar');
-        var bin1 = this.physics.add.sprite(50, 200, 'bin');
-        var trafCone1 = this.physics.add.sprite(90, 200, 'trafCone');
+        var brooch = this.physics.add.sprite(600, 300, 'brooch');
+        var diamond = this.physics.add.sprite(470, 205, 'diamond');
+        var key = this.physics.add.sprite(50, 200, 'key');
+        var ring = this.physics.add.sprite(90, 200, 'ring');
 
         treasures = this.physics.add.group();
-        treasures.add(redCar);
-        treasures.add(orangeCar);
-        treasures.add(bin1);
-        treasures.add(trafCone1);
+        treasures.add(brooch);
+        treasures.add(diamond);
+        treasures.add(key);
+        treasures.add(ring);
 
         // Colliders
         this.physics.add.overlap(player, treasures, collectItem, null, this);
@@ -72,6 +72,12 @@ export default class GameScene extends Phaser.Scene {
         this.anims.create({
             key: 'flyL',
             frames: this.anims.generateFrameNumbers('flyingL', { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkL',
+            frames: this.anims.generateFrameNumbers('walkL', { start: 0, end: 1 }),
             frameRate: 5,
             repeat: -1
         });
@@ -119,7 +125,7 @@ export default class GameScene extends Phaser.Scene {
         if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
-            player.anims.play('flyL', true);
+            player.anims.play('walkL', true);
 
             //player.anims.play('left', true);
         }

@@ -84,18 +84,16 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.audio('coinSound', ['assets/sound/fx/coin.wav']);
 
 
-        this.load.image('trolley', 'assets/img/trolley.png');
-        this.load.spritesheet('player', 'assets/img/playerSprite.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('coin', 'assets/img/coin.png', { frameWidth: 16, frameHeight: 16 });
-        this.load.image('carPark', 'assets/img/carPark.png');
-        this.load.image('redCar', 'assets/img/carRed.png');
-        this.load.image('greenCar', 'assets/img/carGreen.png');
-        this.load.image('blueCar', 'assets/img/carBlue.png');
-        this.load.image('orangeCar', 'assets/img/carOrange.png');
-        this.load.image('blackCar', 'assets/img/carBlack.png');
-        this.load.image('conveyorIndicator', 'assets/img/conveyorIndicator.png');
-        this.load.image('bin', 'assets/img/bin.png');
-        this.load.image('trafCone', 'assets/img/trafficCone.png');
+
+        this.load.image('brooch', 'assets/img/treasure/brooch.png');
+        this.load.image('diamond', 'assets/img/treasure/diamond.png');
+        this.load.image('earbud', 'assets/img/treasure/earbud.png');
+        this.load.image('earring1', 'assets/img/treasure/earring1.png');
+        this.load.image('key', 'assets/img/treasure/key.png');
+        this.load.image('pearl', 'assets/img/treasure/pearl.png');
+        this.load.image('ring', 'assets/img/treasure/ring.png');
+        
 
         //Backgrounds
         this.load.image('menuBG', 'assets/img/menuBackground.png');
@@ -108,18 +106,15 @@ export default class PreloaderScene extends Phaser.Scene {
 
         this.load.spritesheet('flyingL', 'assets/img/flying.png', { frameWidth: 250, frameHeight: 200 });
         this.load.spritesheet('flyingR', 'assets/img/flyingRight.png', { frameWidth: 250, frameHeight: 200 });
+        this.load.spritesheet('walkL', 'assets/img/walkingSprite.png', { frameWidth: 175, frameHeight: 230 });
         this.load.image('standing', 'assets/img/standing.png');
 
-        this.load.image('sky', 'assets/img/sky.png');
         this.load.image('deathScene', 'assets/img/deathScene.png');
 
         this.load.image('Button', 'assets/img/button1.png');
         this.load.image('ButtonPressed', 'assets/img/button1selected.png');
         this.load.image('box', 'assets/img/box.png');
         this.load.image('checkedBox', 'assets/img/checked1.png');
-        //this.load.image('Logo', 'assets/img/logoBigger.png');
-        //this.load.image('Background', 'assets/img/background.png');
-        this.load.image('House', 'assets/img/trolleyHouse.png');
 
         // remove progress bar when complete
         this.load.on('complete', function () {

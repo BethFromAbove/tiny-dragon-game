@@ -1,11 +1,6 @@
 import 'phaser';
 import Button from '../Objects/Button';
 
-var indicators;
-var purchases;
-
-// @TODO: create food item assets and put their names here
-var purchaseOptions = ['player', 'trolley', 'redCar'];
 
 export default class TitleScene extends Phaser.Scene {
     constructor () {
@@ -16,29 +11,6 @@ export default class TitleScene extends Phaser.Scene {
 	var config = this.game.config;
 
         this.add.image(config.width/2, config.height/2, 'menuBG');
-
-        // Draw conveyor belt
-        this.add.rectangle(config.width*0.5 - 50, config.height*0.85, config.width + 100, 100, 0x394648);
-
-        // Conveyor belt moving indicators
-        indicators = this.physics.add.group();
-        for (var i = 0; i < 3; i++) {
-            var indicator = this.physics.add.sprite(i*(config.width + 100)/3, config.height*0.85, 'conveyorIndicator');
-            indicators.add(indicator);
-            indicator.body.setVelocityX(40);
-        }
-
-        // Items on conveyor belt
-        purchases = this.physics.add.group();
-        for(var i = 0; i < 5; i++) {
-            var purchase = this.physics.add.sprite(
-                i*(config.width + 100)/5 - config.width/2,
-                Phaser.Math.RND.between(config.height*0.82, config.height*0.88),
-                Phaser.Math.RND.pick(purchaseOptions)
-            );
-            purchases.add(purchase);
-            purchase.body.setVelocityX(40);
-        };
 
         // Game - Head to Rocket Select page
         this.gameButton = new Button(this, config.width*0.75, config.height/2 - 110, 'Button', 'ButtonPressed', 'Play', 'Game');
@@ -76,25 +48,5 @@ export default class TitleScene extends Phaser.Scene {
     update () {
         var config = this.game.config;
 
-        indicators.children.each((indicator) => {
-            if (indicator.x > config.width + 50) {
-                indicator.setX(-50);
-            }
-        });
-
-        // Refresh purchases when they scroll off screen
-        purchases.children.each((purchase) => {
-            if (purchase.x > config.width + 50) {
-                console.log("NEW");
-                purchase.destroy();
-                var newPurchase = this.physics.add.sprite(
-                    Phaser.Math.RND.between(-100, -50),
-                    Phaser.Math.RND.between(config.height*0.82, config.height*0.88),
-                    Phaser.Math.RND.pick(purchaseOptions)
-                );
-                purchases.add(newPurchase);
-                newPurchase.body.setVelocityX(40);
-            }
-        });
     }
 };
