@@ -104,10 +104,12 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('livingRoom', 'assets/img/livingroom.png');
         this.load.image('floorplatform', 'assets/img/floorPlatform.png');
 
-        this.load.spritesheet('flyingL', 'assets/img/flying.png', { frameWidth: 250, frameHeight: 200 });
-        this.load.spritesheet('flyingR', 'assets/img/flyingRight.png', { frameWidth: 250, frameHeight: 200 });
-        this.load.spritesheet('walkL', 'assets/img/walkingSprite.png', { frameWidth: 175, frameHeight: 230 });
+        //this.load.spritesheet('flyingL', 'assets/img/flying.png', { frameWidth: 250, frameHeight: 200 });
+        //this.load.spritesheet('flyingR', 'assets/img/flyingRight.png', { frameWidth: 250, frameHeight: 200 });
+        this.load.spritesheet('walk', 'assets/img/walkingSpritenew.png', { frameWidth: 88, frameHeight: 115 });
         this.load.image('standing', 'assets/img/standing.png');
+        this.load.spritesheet('flying', 'assets/img/flyingSpriteTall.png', { frameWidth: 125, frameHeight: 115 });
+
 
         this.load.image('deathScene', 'assets/img/deathScene.png');
 

@@ -23,16 +23,53 @@ export default class GameScene extends Phaser.Scene {
         var gameHeight = game.config.height;
 
         // Set the boundaries of the gameworld - worldScaleFactor * dimensions of the browser viewport
-        var worldScaleFactor = 2;
+        var worldScaleFactor = 4;
         var gameWorld = this.physics.world;
-        gameWorld.setBounds(0, 0, gameWidth * worldScaleFactor, gameHeight * worldScaleFactor);
-        this.cameras.main.setBounds(0, 0, 1600, 1200);
+        var gameWorldWidth = gameWidth * worldScaleFactor;
+        var gameWorldHeight = gameHeight * worldScaleFactor;
+        gameWorld.setBounds(0, 0, gameWorldWidth, gameWorldHeight);
+        this.cameras.main.setBounds(0, 0, gameWorldWidth, gameWorldHeight);
 
         var background = this.add.image(0, 0, 'livingRoom');
+        background.setScale(2);
         background.setOrigin(0, 0);
 
-        player = this.physics.add.sprite(0, 0, 'standing');
+         // Animations
+        this.anims.create({
+            key: 'flyR',
+            frames: this.anims.generateFrameNumbers('flying', { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'flyL',
+            frames: this.anims.generateFrameNumbers('flying', { start: 3, end: 5 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkL',
+            frames: this.anims.generateFrameNumbers('walk', { start: 0, end: 1 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkR',
+            frames: this.anims.generateFrameNumbers('walk', { start: 2, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'spin',
+            frames: this.anims.generateFrameNumbers('coin', { start: 0, end: 5 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        player = this.physics.add.sprite(0, 0, 'walk');
         player.setCollideWorldBounds(true);
+        player.setMaxVelocity(400, 400)
+        player.play('walkR');
 
         // Input Events
         cursors = this.input.keyboard.createCursorKeys();
@@ -62,31 +99,6 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(treasures, platforms);
 
-        // Animations
-        this.anims.create({
-            key: 'flyR',
-            frames: this.anims.generateFrameNumbers('flyingR', { start: 0, end: 2 }),
-            frameRate: 5,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'flyL',
-            frames: this.anims.generateFrameNumbers('flyingL', { start: 0, end: 2 }),
-            frameRate: 5,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'walkL',
-            frames: this.anims.generateFrameNumbers('walkL', { start: 0, end: 1 }),
-            frameRate: 5,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'spin',
-            frames: this.anims.generateFrameNumbers('coin', { start: 0, end: 5 }),
-            frameRate: 10,
-            repeat: -1
-        });
 
         // Play the game music
         this.model = this.sys.game.globals.model;
@@ -122,36 +134,79 @@ export default class GameScene extends Phaser.Scene {
     {
         var config = this.game.config;
 
+        player.setAcceleration(0, 0);
+        var x = player.body.velocity.x;
+
         if (cursors.left.isDown)
         {
-            player.setVelocityX(-160);
-            player.anims.play('walkL', true);
-
-            //player.anims.play('left', true);
+            
+            if (player.body.touching.down)
+            {
+                player.setAccelerationX(-2000);
+                player.anims.play('walkL', true);
+            }
+            else
+            {
+                player.setAccelerationX(-1000);
+                player.anims.play('flyL', true);
+            }
         }
         else if (cursors.right.isDown)
         {
-            player.setVelocityX(160);
-            player.anims.play('flyR', true);
-
-            //player.anims.play('right', true);
+            
+            if (player.body.touching.down)
+            {
+                player.setAccelerationX(2000);
+                player.anims.play('walkR', true);
+            }
+            else
+            {
+                player.setAccelerationX(1000);
+                player.anims.play('flyR', true);
+            }
         }
         else
         {
-            player.setVelocityX(0);
-            //player.anims.play('flyR', false);
-            //player.anims.play('turn');
-            player.setTexture('standing');
+            if (x < -30)
+            {
+                player.setAccelerationX(4000);
+            }
+            else if (x > 30)
+            {
+                player.setAccelerationX(-4000);
+            }
+            else
+            {
+                player.setVelocityX(0);
+                if (player.body.touching.down)
+                {
+                    // Try commenting this out!
+                    // when commented out, walking behaves normally, flying lands as flying
+                    // with it, walking gets stuck facing Right, but log only triggers when landing
+                    // if (player.anims.currentAnim.key == 'flyL' || 'flyR')
+                    // {
+                    //     console.log(player.anims.currentAnim.key == 'flyL' || 'flyR');
+                    //     player.anims.play('walkR', true);
+                    // }
+                     
+                    player.anims.stop();
+                }
+            }
+            
         }
-
-        if (cursors.up.isDown && player.body.touching.down)
+        
+        if (cursors.up.isDown)
         {
-            player.setVelocityY(-330);
-        }
-        else if (cursors.up.isDown && !player.body.touching.down)
-        {
-            player.setVelocityY(-150);
-        }
+            player.setAccelerationY(-4000);
+            if (x < 0)
+            {
+                player.anims.play('flyL', true);
+            }
+            else
+            {
+                player.anims.play('flyR', true);
+            }
+        }        
 
         this.cameras.main.centerOn(player.x, player.y);
     }
