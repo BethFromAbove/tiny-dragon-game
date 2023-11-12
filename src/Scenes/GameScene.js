@@ -25,13 +25,15 @@ export default class GameScene extends Phaser.Scene {
         // Set the boundaries of the gameworld - worldScaleFactor * dimensions of the browser viewport
         var worldScaleFactor = 4;
         var gameWorld = this.physics.world;
-        var gameWorldWidth = gameWidth * worldScaleFactor;
-        var gameWorldHeight = gameHeight * worldScaleFactor;
+        //var gameWorldWidth = gameWidth * worldScaleFactor;
+        //var gameWorldHeight = gameHeight * worldScaleFactor;
+        var gameWorldWidth = 3200;
+        var gameWorldHeight = 1700;
         gameWorld.setBounds(0, 0, gameWorldWidth, gameWorldHeight);
         this.cameras.main.setBounds(0, 0, gameWorldWidth, gameWorldHeight);
 
         var background = this.add.image(0, 0, 'livingRoom');
-        background.setScale(2);
+        //background.setScale(2);
         background.setOrigin(0, 0);
 
          // Animations
@@ -71,10 +73,9 @@ export default class GameScene extends Phaser.Scene {
 
         // Walkable surfaces
         platforms = this.physics.add.staticGroup();
-        platforms.create(400, 568, 'Button').setScale(2).refreshBody();
-        platforms.create(600, 400, 'Button');
-        platforms.create(50, 250, 'Button');
-        platforms.create(750, 220, 'Button');
+        platforms.create(1780, 290, 'longPlatformInvis'); //curtain rail
+        platforms.create(1715, 1110, 'longPlatform'); // sofa back
+        platforms.create(1760, 1388, 'longPlatform'); //sofa cushion
         platforms.create(800, 1100,'floorplatform');
 
         player = this.physics.add.sprite(0, 0, 'walk');

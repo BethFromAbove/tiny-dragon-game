@@ -94,6 +94,8 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('pearl', 'assets/img/treasure/pearl.png');
         this.load.image('ring', 'assets/img/treasure/ring.png');
         
+        this.load.image('longPlatform', 'assets/img/longPlatform.png');
+        this.load.image('longPlatformInvis', 'assets/img/longPlatformInvis.png');
 
         //Backgrounds
         this.load.image('menuBG', 'assets/img/menuBackground.png');
@@ -101,7 +103,7 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('aboutBG', 'assets/img/aboutBackground.png');
         this.load.image('introBG', 'assets/img/introBackground.png');
 
-        this.load.image('livingRoom', 'assets/img/livingroom.png');
+        this.load.image('livingRoom', 'assets/img/livingRoom3200x1700.png');
         this.load.image('floorplatform', 'assets/img/floorPlatform.png');
 
         //this.load.spritesheet('flyingL', 'assets/img/flying.png', { frameWidth: 250, frameHeight: 200 });
