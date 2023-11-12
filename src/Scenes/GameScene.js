@@ -66,11 +66,6 @@ export default class GameScene extends Phaser.Scene {
             repeat: -1
         });
 
-        player = this.physics.add.sprite(0, 0, 'walk');
-        player.setCollideWorldBounds(true);
-        player.setMaxVelocity(400, 400)
-        player.play('walkR');
-
         // Input Events
         cursors = this.input.keyboard.createCursorKeys();
 
@@ -81,6 +76,11 @@ export default class GameScene extends Phaser.Scene {
         platforms.create(50, 250, 'Button');
         platforms.create(750, 220, 'Button');
         platforms.create(800, 1100,'floorplatform');
+
+        player = this.physics.add.sprite(0, 0, 'walk');
+        player.setCollideWorldBounds(true);
+        player.setMaxVelocity(400, 400)
+        player.play('walkR');
 
         // Treasures to collect
         var brooch = this.physics.add.sprite(600, 300, 'brooch');
@@ -96,7 +96,7 @@ export default class GameScene extends Phaser.Scene {
 
         // Colliders
         this.physics.add.overlap(player, treasures, collectItem, null, this);
-        this.physics.add.collider(player, platforms);
+        this.physics.add.collider(player, platforms, null, checkOneWay, this);
         this.physics.add.collider(treasures, platforms);
 
 
@@ -178,17 +178,16 @@ export default class GameScene extends Phaser.Scene {
             else
             {
                 player.setVelocityX(0);
-                if (player.body.touching.down)
+                if (player.body.touching.down) // causes the sprite to change to walking when landing
                 {
-                    // Try commenting this out!
-                    // when commented out, walking behaves normally, flying lands as flying
-                    // with it, walking gets stuck facing Right, but log only triggers when landing
-                    // if (player.anims.currentAnim.key == 'flyL' || 'flyR')
-                    // {
-                    //     console.log(player.anims.currentAnim.key == 'flyL' || 'flyR');
-                    //     player.anims.play('walkR', true);
-                    // }
-                     
+                    if (player.anims.currentAnim.key == 'flyR')
+                    {
+                        player.anims.play('walkR', true);
+                    }
+                    else if (player.anims.currentAnim.key == 'flyL')
+                    {
+                        player.anims.play('walkL', true);
+                    }
                     player.anims.stop();
                 }
             }
@@ -249,5 +248,14 @@ function collectItem (player, item) {
 
     totalScore = totalScore + 5;
     scoreText.setText(totalScore);
+}
+
+function checkOneWay(player, oneway) {
+    //if player is higher up the screen then the plaform then enable the collision
+    if (player.y < oneway.y) {
+        return true;
+    }
+    //otherwise disable collision
+    return false;
 }
 
