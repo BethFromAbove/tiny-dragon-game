@@ -10,6 +10,8 @@ var platforms;
 var coin;
 var totalScore = 0;
 var scoreText;
+var totalTreasure = 0;
+var treasureCollectedText;
 
 export default class GameScene extends Phaser.Scene {
     constructor () {
@@ -76,7 +78,24 @@ export default class GameScene extends Phaser.Scene {
         platforms.create(1780, 290, 'longPlatformInvis'); //curtain rail
         platforms.create(1715, 1110, 'longPlatform'); // sofa back
         platforms.create(1760, 1388, 'longPlatform'); //sofa cushion
-        platforms.create(800, 1100,'floorplatform');
+        platforms.create(430, 1050, 'longPlatform'); // cabinet top
+        platforms.create(3000, 290, 'longPlatform'); // Door top
+        platforms.create(755, 930, 'shortPlatform'); // leafy cabinet plant pot
+        platforms.create(230, 850, 'shortPlatform'); // small cabinet frame
+        platforms.create(115, 930, 'shortPlatform'); // round cabinet plant pot
+        platforms.create(1270, 1270, 'shortPlatform'); // left sofa arm
+        platforms.create(2240, 1270, 'shortPlatform'); // right sofa arm
+        platforms.create(2450, 1050, 'shortPlatform'); // lamp top
+        platforms.create(2750, 960, 'shortPlatform'); // door handle
+        platforms.create(490, 795, 'mediumPlatform'); // big cabinet frame
+        platforms.create(2370, 370, 'mediumPlatform'); // higher hanging frame
+        platforms.create(2370, 625, 'mediumPlatform'); // lower hanging frame
+        platforms.create(1030, 1465, 'mediumPlatform'); // floor plant pot
+        platforms.create(2010, 1190, 'mediumPlatform'); // sofa cushion
+        platforms.create(2470, 1330, 'medLongPlatform'); // lamp table
+        platforms.create(1160, 420, 'medLongPlatform'); // big wall frame
+
+        platforms.create(1600, 1650,'floorplatform');
 
         player = this.physics.add.sprite(0, 0, 'walk');
         player.setCollideWorldBounds(true);
@@ -110,25 +129,38 @@ export default class GameScene extends Phaser.Scene {
             this.model.bgMusicPlaying = true;
             this.sys.game.globals.bgMusic = this.bgMusic;
         }
-        var scoreCoin = this.physics.add.sprite(config.width * 0.035, config.height * 0.08, 'coin');
-        scoreCoin.anims.play('spin', true);
-        scoreCoin.setScrollFactor(0);
-        scoreCoin.setScale(2);
-        scoreCoin.setImmovable(true);
-        scoreCoin.body.setAllowGravity(false);
+
+        // var scoreCoin = this.physics.add.sprite(config.width * 0.035, config.height * 0.08, 'coin');
+        // scoreCoin.anims.play('spin', true);
+        // scoreCoin.setScrollFactor(0);
+        // scoreCoin.setScale(2);
+        // scoreCoin.setImmovable(true);
+        // scoreCoin.body.setAllowGravity(false);
 
         // Display scoreboard
-        totalScore = 0;
-        scoreText = this.add.text(
-            config.width * 0.07,
+        // totalScore = 0;
+        // scoreText = this.add.text(
+        //     config.width * 0.07,
+        //     config.height * 0.05,
+        //     totalScore,
+        //     {align: 'center',
+        //      fontSize: '48px',
+        //      fill: '#FFF',
+        //      backgroundColor: 'rgba(0,0,0,0.5)'}
+        // );
+        // scoreText.setScrollFactor(0);
+
+        // Display Treasures collected per room
+        treasureCollectedText = this.add.text(
+            config.width * 0.03,
             config.height * 0.05,
-            totalScore,
+            "Treasure collected: " + totalTreasure + "/5",
             {align: 'center',
-             fontSize: '48px',
+             fontSize: '24px',
              fill: '#FFF',
              backgroundColor: 'rgba(0,0,0,0.5)'}
         );
-        scoreText.setScrollFactor(0);
+        treasureCollectedText.setScrollFactor(0);
     }
 
     update ()
@@ -247,14 +279,24 @@ function collectItem (player, item) {
         duration: 1000
     });
 
-    totalScore = totalScore + 5;
-    scoreText.setText(totalScore);
+    // totalScore = totalScore + 5;
+    // scoreText.setText(totalScore);
+
+    totalTreasure = totalTreasure + 1;
+    treasureCollectedText.setText("Treasure collected: " + totalTreasure + "/5");
 }
 
 function checkOneWay(player, oneway) {
     //if player is higher up the screen then the plaform then enable the collision
-    if (player.y < oneway.y) {
-        return true;
+    // + 50 to make it the feet of the player
+    if ((player.y + 50) < oneway.y) {
+        // disable collision if down is held
+        if (cursors.down.isDown) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
     //otherwise disable collision
     return false;
