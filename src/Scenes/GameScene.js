@@ -76,43 +76,57 @@ export default class GameScene extends Phaser.Scene {
         // Walkable surfaces
         platforms = this.physics.add.staticGroup();
         platforms.create(1780, 290, 'longPlatformInvis'); //curtain rail
-        platforms.create(1715, 1110, 'longPlatform'); // sofa back
-        platforms.create(1760, 1388, 'longPlatform'); //sofa cushion
-        platforms.create(430, 1050, 'longPlatform'); // cabinet top
-        platforms.create(3000, 290, 'longPlatform'); // Door top
-        platforms.create(755, 930, 'shortPlatform'); // leafy cabinet plant pot
-        platforms.create(230, 850, 'shortPlatform'); // small cabinet frame
-        platforms.create(115, 930, 'shortPlatform'); // round cabinet plant pot
-        platforms.create(1270, 1270, 'shortPlatform'); // left sofa arm
-        platforms.create(2240, 1270, 'shortPlatform'); // right sofa arm
-        platforms.create(2450, 1050, 'shortPlatform'); // lamp top
-        platforms.create(2750, 960, 'shortPlatform'); // door handle
-        platforms.create(490, 795, 'mediumPlatform'); // big cabinet frame
-        platforms.create(2370, 370, 'mediumPlatform'); // higher hanging frame
-        platforms.create(2370, 625, 'mediumPlatform'); // lower hanging frame
-        platforms.create(1030, 1465, 'mediumPlatform'); // floor plant pot
-        platforms.create(2010, 1190, 'mediumPlatform'); // sofa cushion
-        platforms.create(2470, 1330, 'medLongPlatform'); // lamp table
-        platforms.create(1160, 420, 'medLongPlatform'); // big wall frame
+        platforms.create(1715, 1110, 'longPlatformInvis'); // sofa back
+        platforms.create(1760, 1388, 'longPlatformInvis'); //sofa cushion
+        platforms.create(430, 1060, 'longPlatformInvis'); // cabinet top
+        platforms.create(3000, 290, 'longPlatformInvis'); // Door top
+        platforms.create(755, 940, 'shortPlatformInvis'); // leafy cabinet plant pot
+        platforms.create(230, 850, 'shortPlatformInvis'); // small cabinet frame
+        platforms.create(115, 930, 'shortPlatformInvis'); // round cabinet plant pot
+        platforms.create(1270, 1270, 'shortPlatformInvis'); // left sofa arm
+        platforms.create(2240, 1270, 'shortPlatformInvis'); // right sofa arm
+        platforms.create(2450, 1050, 'shortPlatformInvis'); // lamp top
+        platforms.create(2750, 960, 'shortPlatformInvis'); // door handle
+        platforms.create(490, 795, 'mediumPlatformInvis'); // big cabinet frame
+        platforms.create(2370, 370, 'mediumPlatformInvis'); // higher hanging frame
+        platforms.create(2370, 625, 'mediumPlatformInvis'); // lower hanging frame
+        platforms.create(1030, 1465, 'mediumPlatformInvis'); // floor plant pot
+        platforms.create(2010, 1190, 'mediumPlatformInvis'); // sofa cushion
+        platforms.create(2470, 1330, 'medLongPlatformInvis'); // lamp table
+        platforms.create(1160, 420, 'medLongPlatformInvis'); // big wall frame
 
         platforms.create(1600, 1650,'floorplatform');
 
-        player = this.physics.add.sprite(0, 0, 'walk');
+        player = this.physics.add.sprite(100, 950, 'walk');
         player.setCollideWorldBounds(true);
         player.setMaxVelocity(400, 400)
         player.play('walkR');
 
         // Treasures to collect
-        var brooch = this.physics.add.sprite(600, 300, 'brooch');
-        var diamond = this.physics.add.sprite(470, 205, 'diamond');
-        var key = this.physics.add.sprite(50, 200, 'key');
-        var ring = this.physics.add.sprite(90, 200, 'ring');
+        var pearl = this.physics.add.sprite(1270, 1230, 'pearl'); // sofa arm
+        var diamond = this.physics.add.sprite(2000, 1070, 'diamond'); // top of the sofa
+        var key = this.physics.add.sprite(3130, 230, 'key'); // on top of door
+        var wallet = this.physics.add.sprite(2515, 1270, 'wallet'); // lamp table
+        var earbud = this.physics.add.sprite(800, 900, 'earbud'); // counter plant
+        var earring1 = this.physics.add.sprite(2150, 230, 'earring1'); // curtain rail
+        var earring2 = this.physics.add.sprite(1050, 380, 'earring2'); // on picture frame
+        var brooch = this.physics.add.sprite(1010, 1420, 'brooch'); // in big plant pot
+        var usb = this.physics.add.sprite(130, 1580, 'usb'); // under counter
+        var ring = this.physics.add.sprite(280, 1000, 'ring'); // on the counter
+        var watch = this.physics.add.sprite(2125, 1320, 'watch'); // behind sofa cushion
 
         treasures = this.physics.add.group();
         treasures.add(brooch);
         treasures.add(diamond);
         treasures.add(key);
         treasures.add(ring);
+        treasures.add(earbud);
+        treasures.add(earring1);
+        treasures.add(earring2);
+        treasures.add(pearl);
+        treasures.add(usb);
+        treasures.add(wallet);
+        treasures.add(watch);
 
         // Colliders
         this.physics.add.overlap(player, treasures, collectItem, null, this);
@@ -121,14 +135,14 @@ export default class GameScene extends Phaser.Scene {
 
 
         // Play the game music
-        this.model = this.sys.game.globals.model;
-        if (this.model.musicOn === true) {
-            this.sound.stopAll();
-            this.bgMusic = this.sound.add('gameMusic', { volume: 0.5, loop: true });
-            this.bgMusic.play();
-            this.model.bgMusicPlaying = true;
-            this.sys.game.globals.bgMusic = this.bgMusic;
-        }
+        // this.model = this.sys.game.globals.model;
+        // if (this.model.musicOn === true) {
+        //     this.sound.stopAll();
+        //     this.bgMusic = this.sound.add('gameMusic', { volume: 0.5, loop: true });
+        //     this.bgMusic.play();
+        //     this.model.bgMusicPlaying = true;
+        //     this.sys.game.globals.bgMusic = this.bgMusic;
+        // }
 
         // var scoreCoin = this.physics.add.sprite(config.width * 0.035, config.height * 0.08, 'coin');
         // scoreCoin.anims.play('spin', true);
@@ -154,7 +168,7 @@ export default class GameScene extends Phaser.Scene {
         treasureCollectedText = this.add.text(
             config.width * 0.03,
             config.height * 0.05,
-            "Treasure collected: " + totalTreasure + "/5",
+            "Treasure collected: " + totalTreasure + "/11",
             {align: 'center',
              fontSize: '24px',
              fill: '#FFF',
@@ -283,7 +297,7 @@ function collectItem (player, item) {
     // scoreText.setText(totalScore);
 
     totalTreasure = totalTreasure + 1;
-    treasureCollectedText.setText("Treasure collected: " + totalTreasure + "/5");
+    treasureCollectedText.setText("Treasure collected: " + totalTreasure + "/11");
 }
 
 function checkOneWay(player, oneway) {

@@ -75,14 +75,9 @@ export default class PreloaderScene extends Phaser.Scene {
 
         // load assets needed in our game
 
-        this.load.audio('titleMusic', ['assets/sound/music/aldi-ambience.mp3']);
+        this.load.audio('titleMusic', ['assets/sound/music/8bit Romance Loopable.mp3']);
         this.load.audio('gameMusic', ['assets/sound/music/newer-wave.mp3']);
-        this.load.audio('tills', ['assets/sound/fx/aldi-tills.wav']);
-        this.load.audio('crash-1', ['assets/sound/fx/crash-1.wav']);
-        this.load.audio('crash-2', ['assets/sound/fx/crash-2.wav']);
-        this.load.audio('crash-3', ['assets/sound/fx/crash-3.wav']);
         this.load.audio('coinSound', ['assets/sound/fx/coin.wav']);
-
 
         this.load.spritesheet('coin', 'assets/img/coin.png', { frameWidth: 16, frameHeight: 16 });
 
@@ -91,9 +86,13 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('diamond', 'assets/img/treasure/diamond.png');
         this.load.image('earbud', 'assets/img/treasure/earbud.png');
         this.load.image('earring1', 'assets/img/treasure/earring1.png');
+        this.load.image('earring2', 'assets/img/treasure/earring2.png');
         this.load.image('key', 'assets/img/treasure/key.png');
         this.load.image('pearl', 'assets/img/treasure/pearlSmall.png');
         this.load.image('ring', 'assets/img/treasure/ringSmall.png');
+        this.load.image('usb', 'assets/img/treasure/usbSmall.png');
+        this.load.image('wallet', 'assets/img/treasure/walletSmall.png');
+        this.load.image('watch', 'assets/img/treasure/watch.png');
         
         // Platforms
         this.load.image('longPlatform', 'assets/img/longPlatform.png');
