@@ -4,6 +4,12 @@ This is a game created for the Github Game off 2023, a month long game making ma
 
 The game is written in JavaScript using Phaser 3.
 
+This game jam was mainly an exercise in exploring AI generated art for use in game jams. The original plan was to have many levels in different areas of the house, art for which can be found in the assets folder. Due to time constraints, the eventual game is just one level and more of a proof of concept. 
+
+The main learnings from this experience was that the AI tools I was using (ChatGPT 4 and Dall-E 3) can create very good one-off images (great for backgrounds), but trying to get it to create similar looking images, i.e. multiple images of the player character, is very very difficult. The tools don't understand what a spritesheet is and end up giving the character in different positions (standing, lying down etc), but some are often cut off at the edges and not quite the same as each other, missing limbs etc. Trying to get a new image of a character you like is almost impossible and I ended up heavily using editing tools (GIMP) to manipulate the AI art into something usable.
+
+In the future, I will likely use AI art for backgrounds extensively and as inspiration for characters and other assets that need to move.
+
 ## Requirements
 
 [Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.

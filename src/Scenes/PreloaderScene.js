@@ -75,11 +75,9 @@ export default class PreloaderScene extends Phaser.Scene {
 
         // load assets needed in our game
 
-        this.load.audio('titleMusic', ['assets/sound/music/8bit Romance Loopable.mp3']);
-        this.load.audio('gameMusic', ['assets/sound/music/newer-wave.mp3']);
+        // Audio
+        this.load.audio('gameMusic', ['assets/sound/music/8bit Romance Loopable.mp3']);
         this.load.audio('coinSound', ['assets/sound/fx/coin.wav']);
-
-        this.load.spritesheet('coin', 'assets/img/coin.png', { frameWidth: 16, frameHeight: 16 });
 
         // Treasures 
         this.load.image('brooch', 'assets/img/treasure/broochSmall.png');
@@ -95,35 +93,25 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('watch', 'assets/img/treasure/watch.png');
         
         // Platforms
-        this.load.image('longPlatform', 'assets/img/longPlatform.png');
         this.load.image('longPlatformInvis', 'assets/img/longPlatformInvis.png');
-        this.load.image('shortPlatform', 'assets/img/shortPlatform.png');
         this.load.image('shortPlatformInvis', 'assets/img/shortPlatformInvis.png');
-        this.load.image('mediumPlatform', 'assets/img/mediumPlatform.png');
         this.load.image('mediumPlatformInvis', 'assets/img/mediumPlatformInvis.png');
-        this.load.image('medLongPlatform', 'assets/img/medLongPlatform.png');
         this.load.image('medLongPlatformInvis', 'assets/img/medLongPlatformInvis.png');
-        this.load.image('tinyPlatform', 'assets/img/tinyPlatform.png');
         this.load.image('tinyPlatformInvis', 'assets/img/tinyPlatformInvis.png');
         this.load.image('floorplatform', 'assets/img/floorPlatform.png');
-
 
         //Backgrounds
         this.load.image('menuBG', 'assets/img/menuBackground.png');
         this.load.image('optionsBG', 'assets/img/optionsBackground.png');
-        this.load.image('aboutBG', 'assets/img/aboutBackground.png');
-        this.load.image('introBG', 'assets/img/introBackground.png');
         this.load.image('endScene', 'assets/img/endScene.png');
-
         this.load.image('livingRoom', 'assets/img/livingRoom3200x1700.png');
 
-        //this.load.spritesheet('flyingL', 'assets/img/flying.png', { frameWidth: 250, frameHeight: 200 });
-        //this.load.spritesheet('flyingR', 'assets/img/flyingRight.png', { frameWidth: 250, frameHeight: 200 });
+        // Sprite sheets
         this.load.spritesheet('walk', 'assets/img/walkingSpritenew.png', { frameWidth: 88, frameHeight: 115 });
-        this.load.image('standing', 'assets/img/standing.png');
         this.load.spritesheet('flying', 'assets/img/flyingSpriteTall.png', { frameWidth: 125, frameHeight: 115 });
-        
+        this.load.spritesheet('coin', 'assets/img/coin.png', { frameWidth: 16, frameHeight: 16 });
 
+        // Buttons
         this.load.image('Button', 'assets/img/button1.png');
         this.load.image('ButtonPressed', 'assets/img/button1selected.png');
         this.load.image('optionsCog', 'assets/img/optionsCog.png');
@@ -137,12 +125,7 @@ export default class PreloaderScene extends Phaser.Scene {
             loadingText.destroy();
             percentText.destroy();
             assetText.destroy();
-            this.game.registry.set('titleMusic', this.sound.add('titleMusic', { volume: 0.5, loop: true }));
             this.game.registry.set('gameMusic', this.sound.add('gameMusic', { volume: 0.5, loop: true }));
-            this.game.registry.set('tills', this.sound.add('tills', { volume: 0.5 }));
-            this.game.registry.set('crash-1', this.sound.add('crash-1', { volume: 0.5 }));
-            this.game.registry.set('crash-2', this.sound.add('crash-2', { volume: 0.5 }));
-            this.game.registry.set('crash-3', this.sound.add('crash-3', { volume: 0.5 }));
             this.game.registry.set('coinSound', this.sound.add('coinSound', { volume: 0.5 }));
             this.ready();
         }.bind(this));

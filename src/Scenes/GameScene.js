@@ -8,8 +8,6 @@ var treasures;
 var platforms;
 
 var coin;
-var totalScore = 0;
-var scoreText;
 var totalTreasure = 0;
 var treasureCollectedText;
 
@@ -27,15 +25,12 @@ export default class GameScene extends Phaser.Scene {
         // Set the boundaries of the gameworld - worldScaleFactor * dimensions of the browser viewport
         var worldScaleFactor = 4;
         var gameWorld = this.physics.world;
-        //var gameWorldWidth = gameWidth * worldScaleFactor;
-        //var gameWorldHeight = gameHeight * worldScaleFactor;
         var gameWorldWidth = 3200;
         var gameWorldHeight = 1700;
         gameWorld.setBounds(0, 0, gameWorldWidth, gameWorldHeight);
         this.cameras.main.setBounds(0, 0, gameWorldWidth, gameWorldHeight);
 
         var background = this.add.image(0, 0, 'livingRoom');
-        //background.setScale(2);
         background.setOrigin(0, 0);
 
          // Animations
@@ -76,7 +71,7 @@ export default class GameScene extends Phaser.Scene {
         // Walkable surfaces
         platforms = this.physics.add.staticGroup();
         platforms.create(1780, 290, 'longPlatformInvis'); //curtain rail
-        platforms.create(1715, 1110, 'longPlatformInvis'); // sofa back
+        platforms.create(1715, 1120, 'longPlatformInvis'); // sofa back
         platforms.create(1760, 1388, 'longPlatformInvis'); //sofa cushion
         platforms.create(430, 1060, 'longPlatformInvis'); // cabinet top
         platforms.create(3000, 290, 'longPlatformInvis'); // Door top
@@ -132,37 +127,6 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.overlap(player, treasures, collectItem, null, this);
         this.physics.add.collider(player, platforms, null, checkOneWay, this);
         this.physics.add.collider(treasures, platforms);
-
-
-        // Play the game music
-        // this.model = this.sys.game.globals.model;
-        // if (this.model.musicOn === true) {
-        //     this.sound.stopAll();
-        //     this.bgMusic = this.sound.add('gameMusic', { volume: 0.5, loop: true });
-        //     this.bgMusic.play();
-        //     this.model.bgMusicPlaying = true;
-        //     this.sys.game.globals.bgMusic = this.bgMusic;
-        // }
-
-        // var scoreCoin = this.physics.add.sprite(config.width * 0.035, config.height * 0.08, 'coin');
-        // scoreCoin.anims.play('spin', true);
-        // scoreCoin.setScrollFactor(0);
-        // scoreCoin.setScale(2);
-        // scoreCoin.setImmovable(true);
-        // scoreCoin.body.setAllowGravity(false);
-
-        // Display scoreboard
-        // totalScore = 0;
-        // scoreText = this.add.text(
-        //     config.width * 0.07,
-        //     config.height * 0.05,
-        //     totalScore,
-        //     {align: 'center',
-        //      fontSize: '48px',
-        //      fill: '#FFF',
-        //      backgroundColor: 'rgba(0,0,0,0.5)'}
-        // );
-        // scoreText.setScrollFactor(0);
 
         // Display Treasures collected per room
         treasureCollectedText = this.add.text(
@@ -292,9 +256,6 @@ function collectItem (player, item) {
         x: coin.x + (Phaser.Math.RND.sign()*Phaser.Math.RND.between(30, 50)),
         duration: 1000
     });
-
-    // totalScore = totalScore + 5;
-    // scoreText.setText(totalScore);
 
     totalTreasure = totalTreasure + 1;
     treasureCollectedText.setText("Treasure collected: " + totalTreasure + "/11");
