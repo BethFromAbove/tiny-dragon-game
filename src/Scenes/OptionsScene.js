@@ -13,11 +13,11 @@ export default class OptionsScene extends Phaser.Scene {
 
         this.add.image(config.width/2, config.height/2, 'optionsBG');
 
-        this.musicButton = this.add.image(200, 200, 'checkedBox');
-        this.musicText = this.add.text(250, 190, 'Music Enabled', { fontSize: 24 , fill: '#000'});
+        this.musicButton = this.add.image(250, 280, 'checkedBox');
+        this.musicText = this.add.text(300, 270, 'Music Enabled', { fontSize: 24 , fill: '#000'});
 
-        this.soundButton = this.add.image(200, 300, 'checkedBox');
-        this.soundText = this.add.text(250, 290, 'Sound Enabled', { fontSize: 24, fill: '#000' });
+        this.soundButton = this.add.image(250, 380, 'checkedBox');
+        this.soundText = this.add.text(300, 370, 'Sound Enabled', { fontSize: 24, fill: '#000' });
 
         this.musicButton.setInteractive();
         this.soundButton.setInteractive();

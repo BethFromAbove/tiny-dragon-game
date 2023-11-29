@@ -298,6 +298,12 @@ function collectItem (player, item) {
 
     totalTreasure = totalTreasure + 1;
     treasureCollectedText.setText("Treasure collected: " + totalTreasure + "/11");
+
+    if (totalTreasure == 11)
+    {
+        totalTreasure = 0;
+        this.scene.start('End');
+    }
 }
 
 function checkOneWay(player, oneway) {
