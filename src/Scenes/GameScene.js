@@ -22,7 +22,6 @@ export default class GameScene extends Phaser.Scene {
         var gameWidth = game.config.width;
         var gameHeight = game.config.height;
 
-        // Set the boundaries of the gameworld - worldScaleFactor * dimensions of the browser viewport
         var worldScaleFactor = 4;
         var gameWorld = this.physics.world;
         var gameWorldWidth = 3200;
@@ -70,18 +69,18 @@ export default class GameScene extends Phaser.Scene {
 
         // Walkable surfaces
         platforms = this.physics.add.staticGroup();
-        platforms.create(1780, 290, 'longPlatformInvis'); //curtain rail
-        platforms.create(1715, 1120, 'longPlatformInvis'); // sofa back
-        platforms.create(1760, 1388, 'longPlatformInvis'); //sofa cushion
-        platforms.create(430, 1060, 'longPlatformInvis'); // cabinet top
-        platforms.create(3000, 290, 'longPlatformInvis'); // Door top
-        platforms.create(755, 940, 'shortPlatformInvis'); // leafy cabinet plant pot
-        platforms.create(230, 850, 'shortPlatformInvis'); // small cabinet frame
-        platforms.create(115, 930, 'shortPlatformInvis'); // round cabinet plant pot
-        platforms.create(1270, 1270, 'shortPlatformInvis'); // left sofa arm
-        platforms.create(2240, 1270, 'shortPlatformInvis'); // right sofa arm
-        platforms.create(2450, 1050, 'shortPlatformInvis'); // lamp top
-        platforms.create(2750, 960, 'shortPlatformInvis'); // door handle
+        platforms.create(1790, 280, 'longPlatformInvis'); //curtain rail
+        platforms.create(1740, 1120, 'longPlatformInvis'); // sofa back
+        platforms.create(1740, 1388, 'longPlatformInvis'); //sofa cushion
+        platforms.create(430, 1050, 'longPlatformInvis'); // cabinet top
+        platforms.create(3000, 280, 'longPlatformInvis'); // Door top
+        platforms.create(755, 940, 'tinyPlatformInvis'); // leafy cabinet plant pot
+        platforms.create(230, 850, 'tinyPlatformInvis'); // small cabinet frame
+        platforms.create(110, 930, 'tinyPlatformInvis'); // round cabinet plant pot
+        platforms.create(1270, 1270, 'tinyPlatformInvis'); // left sofa arm
+        platforms.create(2240, 1270, 'tinyPlatformInvis'); // right sofa arm
+        platforms.create(2450, 1050, 'tinyPlatformInvis'); // lamp top
+        platforms.create(2750, 960, 'tinyPlatformInvis'); // door handle
         platforms.create(490, 795, 'mediumPlatformInvis'); // big cabinet frame
         platforms.create(2370, 370, 'mediumPlatformInvis'); // higher hanging frame
         platforms.create(2370, 625, 'mediumPlatformInvis'); // lower hanging frame
@@ -178,11 +177,11 @@ export default class GameScene extends Phaser.Scene {
         }
         else
         {
-            if (x < -30)
+            if (x < -35)
             {
                 player.setAccelerationX(4000);
             }
-            else if (x > 30)
+            else if (x > 35)
             {
                 player.setAccelerationX(-4000);
             }
@@ -208,16 +207,26 @@ export default class GameScene extends Phaser.Scene {
         if (cursors.up.isDown)
         {
             player.setAccelerationY(-4000);
-            if (x < 0)
+            if (x < -10)
             {
                 player.anims.play('flyL', true);
             }
-            else
+            else if (x > 10)
             {
                 player.anims.play('flyR', true);
             }
+            else
+            {
+                if ((player.anims.currentAnim.key == 'flyR') || (player.anims.currentAnim.key == 'walkR'))
+                    {
+                        player.anims.play('flyR', true);
+                    }
+                else if (player.anims.currentAnim.key == 'flyL' || (player.anims.currentAnim.key == 'walkL'))
+                    {
+                        player.anims.play('flyL', true);
+                    }
+            }
         }        
-
         this.cameras.main.centerOn(player.x, player.y);
     }
 };
