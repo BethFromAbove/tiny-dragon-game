@@ -1,7 +1,7 @@
 {
-    "name": "the-trolley-problem",
+    "name": "tiny-dragon-game",
     "version": "0.0.1",
-    "description": "Entry for GMTK Game Jam 2021",
+    "description": "Entry for Github GameOff 2023",
     "main": "src/index.js",
     "scripts": {
         "build": "webpack --config webpack/prod.js ",
